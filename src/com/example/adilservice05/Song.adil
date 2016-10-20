@@ -1,0 +1,5 @@
+package com.example.adilservice05;
+interface Song{
+   String getName();
+    String getAuthor();
+}
