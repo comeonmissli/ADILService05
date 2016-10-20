@@ -15,69 +15,22 @@ public class ADILService extends Service {
 	private String[] names=new String[]{"老男孩","春天里","在路上"};
 	private String[] authors=new String[]{"筷子兄弟","汪峰","刘欢"};
 	private String name,author;
-	private IBinder songBinder;
+	private SongBinder songBinder;
 	private Timer timer=new Timer();
-	public class SongBinder implements IBinder	{		
+	public class SongBinder extends Stub	{		
 		public String getName() throws RemoteException {			
 			return name;
 		}
 		public String getAuthor() throws RemoteException {			
 			return author;
 		}
-		@Override
-		public void dump(FileDescriptor fd, String[] args)
-				throws RemoteException {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public void dumpAsync(FileDescriptor fd, String[] args)
-				throws RemoteException {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public String getInterfaceDescriptor() throws RemoteException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public boolean isBinderAlive() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-		@Override
-		public void linkToDeath(DeathRecipient recipient, int flags)
-				throws RemoteException {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public boolean pingBinder() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-		@Override
-		public IInterface queryLocalInterface(String descriptor) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public boolean transact(int code, Parcel data, Parcel reply, int flags)
-				throws RemoteException {
-			// TODO Auto-generated method stub
-			return false;
-		}
-		@Override
-		public boolean unlinkToDeath(DeathRecipient recipient, int flags) {
-			// TODO Auto-generated method stub
-			return false;
-		}		
+		
 	}
+		
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
-		return songBinder;
+		return (IBinder) songBinder;
 	}
    
 	public void onCreate() {		
@@ -91,7 +44,6 @@ public class ADILService extends Service {
 			}
 		}, 0,1000);
 	}
-	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		timer.cancel();
